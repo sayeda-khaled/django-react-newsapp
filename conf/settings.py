@@ -37,18 +37,40 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
 
     #3rd party:
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_auth.registration',
 
     #local
     'accounts.apps.AccountsConfig',
     'frontend.apps.FrontendConfig',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES':[
+        # 'rest_framework.permission.AllowAny', THIS IS THE default
+        'rest_framework.permissions.IsAuthenticated', #this locks down our path.. You can get a request
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication', #is when we are browsing
+        'rest_framework.authentication.TokenAuthentication', #client site in react
+    ]
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -140,9 +162,15 @@ REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend/static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
 
+SITE_ID = 1
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 # Manage profiles#
 # https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-MEDIA_ROOT
 # https://docs.djangoproject.com/en/3.2/topics/files/
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
