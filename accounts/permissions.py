@@ -1,10 +1,12 @@
 from rest_framework import permissions
 
 class IsAuthOrReadOnly(permissions.BasePermission):
-    if request.method in permissions.SAFE_METHODS:
-        return true
 
-    if request.method == 'DELETE':
-        return obj.user == request.uer or request.user.is_staff
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
 
-    return obj.user == request.user
+        if request.method == 'DELETE':
+            return obj.user == request.uer or request.user.is_staff
+        if request.method == 'PUT':
+            return obj.user == request.user
