@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     #local
     'accounts.apps.AccountsConfig',
     'frontend.apps.FrontendConfig',
+    'articles.apps.ArticlesConfig',
 ]
 
 REST_FRAMEWORK = {

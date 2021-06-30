@@ -6,7 +6,7 @@ class User(AbstractUser):
     pass
 
 class Profile(models.Model):
-    user= models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, primary_key=True,)
+    user= models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
     avatar = models.ImageField(upload_to='profiles/') #avatar is a name we choose, it can be what ever we create..
     display_name = models.CharField(max_length=255) #on CharField, you have to have a max_length
     #this means all the avatar modles will be uploaded to a profiles folder
