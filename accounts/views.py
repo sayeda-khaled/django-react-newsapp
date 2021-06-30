@@ -20,6 +20,9 @@ class ProfileListAPIView(generics.ListCreateAPIView):
 
 
 class ProfileDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
     def perform_update(self, serializer):
         instance = serializer.save(user=self.request.user)
 
