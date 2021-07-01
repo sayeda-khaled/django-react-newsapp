@@ -97,7 +97,7 @@ class Profile extends Component{
             </div>
           )
         : null
-    };
+    }
   </>
   );
 }

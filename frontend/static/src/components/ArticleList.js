@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import ArticleDetail from './ArticleDetail.js'; 
+import ArticleDetail from './ArticleDetail.js';
 import Cookies from 'js-cookie';
 
 
@@ -8,7 +8,6 @@ class ArticleList extends Component {
     super(props);
     this.state={
       articles: [],
-      text: '',
     }
     this.addArticle = this.addArticle.bind(this);
     this.editArticle = this.editArticle.bind(this);
@@ -17,6 +16,7 @@ class ArticleList extends Component {
   }
 
   componentDidMount(){
+    // if the user is authenticated pull their articles otherwise pull published articles
     fetch('/api/v1/articles/')
     .then(response => {
       if(!response.ok) {
@@ -24,7 +24,7 @@ class ArticleList extends Component {
       }
       return response.json();
     })
-    .then(data => this.setState({ data  }))
+    .then(data => this.setState({ articles: data  }))
     .catch(error => {
       console.error('There has been a problem with youor fetch operation:', error);
     });

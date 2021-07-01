@@ -13,7 +13,7 @@ class App extends Component{
   constructor(props) {
     super(props);
     this.state={
-      selection: !!Cookies.get('Authorization') ? 'profile' : 'login'
+      selection: !!Cookies.get('Authorization') ? 'profile' : 'articles'
     }
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
@@ -88,13 +88,15 @@ class App extends Component{
 
     return(
       <>
-        <ArticleList />
-        <Navbar handleLogout={this.handleLogout} handleSelection={this.handleSelection} handleLogin={this.handleLogin}handleRegistration={this.handleRegistration}/>
-        <section className="main">
-        {this.state.selection === 'profile' && <Profile />}
-        {this.state.selection === 'registration' && <Registration handleRegistration={this.handleRegistration} handleSelection={this.handleSelection}/>}
-        {this.state.selection === 'login' && <Login handleLogin={this.handleLogin} handleSelection={this.handleSelection}/> }
-        </section>
+
+        <Navbar handleSelection={this.handleSelection} handleLogout={this.handleLogout} />
+
+        <main>
+          {this.state.selection === 'articles' && <ArticleList />}
+          {this.state.selection === 'profile' && <Profile />}
+          {this.state.selection === 'registration' && <Registration handleRegistration={this.handleRegistration} handleSelection={this.handleSelection}/>}
+          {this.state.selection === 'login' && <Login handleLogin={this.handleLogin} handleSelection={this.handleSelection}/> }
+        </main>
       </>
     )
   }

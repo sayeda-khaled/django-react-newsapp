@@ -6,7 +6,7 @@ from django.conf import settings
 
 class Article(models.Model):
     title = models.CharField(max_length=255)
-    body = models.CharField(max_length=255)
+    body = models.TextField()
     # https://docs.djangoproject.com/en/2.2/topics/auth/customizing/#referencing-the-user-model
     # We have now the custom user in accounts... refer to the above link
     # https://www.caktusgroup.com/blog/2019/04/26/how-switch-custom-django-user-model-mid-project/
