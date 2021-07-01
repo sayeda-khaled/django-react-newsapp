@@ -21,11 +21,15 @@ class ArticleDetailAPIView(generics.RetrieveAPIView):
 
 # view(s) for the authenticated user
 class UserArticleListAPIView(generics.ListCreateAPIView):
-    queryset = Article.objects.all()
+    # queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+    def get_queryset(self):
+        user = self.request.user
+        return Article.objects.filter(author=user)
 
             # def get_object(self):
             #     return get_object_or_404(Article, author=self.request.user)

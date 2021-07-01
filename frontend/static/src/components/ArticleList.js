@@ -14,10 +14,13 @@ class ArticleList extends Component {
     this.editArticle = this.editArticle.bind(this);
     this.deleteArticle = this.deleteArticle.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    // this.fetchArticles = this.fetchArticles.bind(this);
+
   }
 
 
     // if the user is authenticated pull their articles otherwise pull published articles
+
 
     componentDidMount(){
       fetch('/api/v1/articles/users')
@@ -27,26 +30,34 @@ class ArticleList extends Component {
         }
         return response.json();
       })
-      .then(data => this.setState({ userArticles:data  }))
+      .then(data => this.setState({ data  }))
       .catch(error => {
         console.error('There has been a problem with youor fetch operation:', error);
       });
     }
 
+    // fetchArticles(){
+    //   const options= {
+    //     method: 'GET',
+    //     headers: {
+    //     'Content-Type': 'application/json',
+    //     'X-CSRFToken': Cookies.get('csrftoken'),
+    //     },
+    //   }
+    //     fetch('/api/v1/articles/users')
+    //     .then(response => {
+    //       if(!response.ok) {
+    //         throw new Error('Network response was not ok');
+    //       }
+    //       return response.json();
+    //     })
+    //     .then(data => this.setState({ userArticles: data  }))
+    //     .catch(error => {
+    //       console.error('There has been a problem with youor fetch operation:', error);
+    //     });
+    //   }
 
-    // componentDidMount(){
-    //   fetch('/api/v1/articles/users')
-    //   .then(response => {
-    //     if(!response.ok) {
-    //       throw new Error('Network response was not ok');
-    //     }
-    //     return response.json();
-    //   })
-    //   .then(data => this.setState({ data  }))
-    //   .catch(error => {
-    //     console.error('There has been a problem with youor fetch operation:', error);
-    //   });
-    // }
+
 
 
   handleInput(event) {
