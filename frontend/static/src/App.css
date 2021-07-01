@@ -2,6 +2,11 @@
   padding: 0;
 }
 
+u{
+  list-style-type: none;
+   margin: 0;
+   padding: 0;
+}
 /*
 .sendButton{
   cursor: pointer;

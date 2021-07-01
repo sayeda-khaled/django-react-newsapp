@@ -5,6 +5,7 @@ import Login from './components/Login';
 import Profile from './components/Profile.js';
 import ArticleList from './components/ArticleList.js';
 import Navbar from './components/Navbar.js';
+import DisplayPage from './components/DisplayPage.js'
 import './App.css';
 
 
@@ -13,7 +14,7 @@ class App extends Component{
   constructor(props) {
     super(props);
     this.state={
-      selection: !!Cookies.get('Authorization') ? 'profile' : 'articles'
+      selection: !!Cookies.get('Authorization') ? 'userArticles' : 'articles'
     }
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
@@ -61,7 +62,7 @@ class App extends Component{
       }
     }
 
-    async handleLogout(){
+    async handleLogout(user){
       const options = {
         method: 'POST',
         headers: {
@@ -74,7 +75,7 @@ class App extends Component{
 
         if(response.ok) {
           Cookies.remove('Authorization');
-          this.setState({ selection: 'login' });
+          this.setState({ selection: 'articles' });
         }
       }
 
@@ -92,8 +93,9 @@ class App extends Component{
         <Navbar handleSelection={this.handleSelection} handleLogout={this.handleLogout} />
 
         <main>
-          {this.state.selection === 'articles' && <ArticleList />}
-          {this.state.selection === 'profile' && <Profile />}
+          {this.state.selection === 'articles' && <DisplayPage />}
+          {this.state.selection === 'profile' && <Profile/> }
+          {this.state.selection === 'userArticles' && <ArticleList />}
           {this.state.selection === 'registration' && <Registration handleRegistration={this.handleRegistration} handleSelection={this.handleSelection}/>}
           {this.state.selection === 'login' && <Login handleLogin={this.handleLogin} handleSelection={this.handleSelection}/> }
         </main>

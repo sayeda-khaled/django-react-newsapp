@@ -27,6 +27,16 @@ class UserArticleListAPIView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
+        # def get_object(self):
+        #     return get_object_or_404(Article, author=self.request.user)
+
 class UserArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+
+    def perform_update(self, serializer):
+        instance = serializer.save(author=self.request.user)
+
+    def get_object(self):
+        return get_object_or_404(Article, author=self.request.user)

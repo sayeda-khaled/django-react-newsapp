@@ -20,31 +20,31 @@ class ArticleDetail extends Component {
   }
 
   saveArticle() {
-    this.props.editArticle(this.props.article.id, this.state.text);
+    this.props.editArticle(this.props.userArticles.id, this.state.text);
     this.setState({ isEditing: false });
   }
 
   render() {
-    const article = this.props.article;
+    const userArticles = this.props.userArticles;
     return(
       <li>
-        <h2>{article.title}</h2>
-        <p>{article.author}</p>
+        <h2>{userArticles.title}</h2>
+        <p>{userArticles.author}</p>
         <div>
           {
             this.state.isEditing
             ? <input type="text" value={this.state.text} onChange={this.handleInput} name="text"/>
-            : <p>{article.body}</p>
+            : <p>{userArticles.body}</p>
             }
 
           {
-            article.is_owner && <button onClick={() => this.props.deleteArticle(article.id)}>delete</button>
+            userArticles.is_owner && <button onClick={() => this.props.deleteArticle(userArticles.id)}>delete</button>
 
           }
           {
             this.state.isEditing
             ? <button type = 'button' onClick={this.saveArticle}>Save</button>
-            : article.is_owner && <button onClick={() => this.setState({isEditing: true})}>Edit</button>
+            : userArticles.is_owner && <button onClick={() => this.setState({isEditing: true})}>Edit</button>
           }
         </div>
 

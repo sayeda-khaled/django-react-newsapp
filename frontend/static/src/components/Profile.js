@@ -97,10 +97,10 @@ class Profile extends Component{
             </div>
           )
         : null
-    }
-  </>
-  );
-}
+      }
+    </>
+    );
+  }
 }
 
 export default Profile;

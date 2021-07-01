@@ -39,10 +39,10 @@ render(){
       <button type="submit" class="btn btn-secondary offset" onClick={() => this.props.handleSelection('login')}>Login</button>
       <button type="submit" class="btn btn-secondary offset" onClick={() => this.props.handleSelection('registration')}>Register</button>
 
-  </form>
+    </form>
 
-  );
-}
+    );
+  }
 
 
 }
