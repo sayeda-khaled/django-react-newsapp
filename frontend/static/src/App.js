@@ -83,8 +83,6 @@ class App extends Component{
       this.setState({selection});
     }
 
-
-
   render() {
 
     return(
@@ -95,7 +93,7 @@ class App extends Component{
         <main>
           {this.state.selection === 'articles' && <DisplayPage />}
           {this.state.selection === 'profile' && <Profile/> }
-          {this.state.selection === 'userArticles' && <ArticleList />}
+          {this.state.selection === 'profile' && <ArticleList />}
           {this.state.selection === 'registration' && <Registration handleRegistration={this.handleRegistration} handleSelection={this.handleSelection}/>}
           {this.state.selection === 'login' && <Login handleLogin={this.handleLogin} handleSelection={this.handleSelection}/> }
         </main>

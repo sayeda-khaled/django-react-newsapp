@@ -8,7 +8,7 @@ class ArticleDetail extends Component {
 
     this.state = {
       isEditing: false,
-      text: this.props.article.text,
+      text: this.props.userArticle.text,
     }
     this.handleInput = this.handleInput.bind(this);
     this.saveArticle = this.saveArticle.bind(this);
@@ -25,7 +25,7 @@ class ArticleDetail extends Component {
   }
 
   render() {
-    const userArticles = this.props.userArticles;
+    const userArticles = this.props.userArticle;
     return(
       <li>
         <h2>{userArticles.title}</h2>

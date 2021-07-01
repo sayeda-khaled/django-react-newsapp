@@ -23,14 +23,14 @@ class ArticleList extends Component {
 
 
     componentDidMount(){
-      fetch('/api/v1/articles/users')
+      fetch('/api/v1/articles/user/')
       .then(response => {
         if(!response.ok) {
           throw new Error('Network response was not ok');
         }
         return response.json();
       })
-      .then(data => this.setState({ data  }))
+      .then(data => this.setState({ userArticles: data  }))
       .catch(error => {
         console.error('There has been a problem with youor fetch operation:', error);
       });
@@ -77,7 +77,7 @@ class ArticleList extends Component {
       },
       body: JSON.stringify(userArticles),
     }
-    fetch('/api/v1/articles/users', options)
+    fetch('/api/v1/articles/user', options)
       .then(response => response.json())
       .then(data => {
         const userArticles = [...this.state.userArticles];
@@ -99,7 +99,7 @@ class ArticleList extends Component {
         },
         body: JSON.stringify(userArticles),
       }
-      fetch(`/api/v1/articles/${id}/`, options)
+      fetch(`/api/v1/articles/user/${id}/`, options)
         .then(response => {
           if(!response.ok) {
             throw new Error('Network response was not ok');
@@ -119,7 +119,7 @@ class ArticleList extends Component {
           'X-CSRFToken': Cookies.get('csrftoken'),
           },
         }
-        fetch(`/api/v1/articles/${id}/`, options)
+        fetch(`/api/v1/articles/user/${id}/`, options)
           .then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
@@ -136,7 +136,7 @@ class ArticleList extends Component {
 
     render() {
       const userArticles = this.state.userArticles.map(userArticle => (
-        <ArticleDetail key={userArticles.id} userArticle={userArticle} deleteArticle={this.deleteArticle} editArticle={this.editArticle} />
+        <ArticleDetail key={userArticle.id} userArticle={userArticle} deleteArticle={this.deleteArticle} editArticle={this.editArticle} />
       ));
 
       return (
