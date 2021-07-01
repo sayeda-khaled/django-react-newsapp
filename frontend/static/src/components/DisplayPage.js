@@ -18,7 +18,7 @@ class DisplayPage extends Component {
         }
         return response.json();
       })
-      .then(data => this.setState({ data  }))
+      .then(data => this.setState({ articles: data  }))
       .catch(error => {
         console.error('There has been a problem with youor fetch operation:', error);
       });

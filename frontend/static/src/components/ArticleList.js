@@ -16,23 +16,37 @@ class ArticleList extends Component {
     this.handleInput = this.handleInput.bind(this);
   }
 
-  componentDidMount(){
+
     // if the user is authenticated pull their articles otherwise pull published articles
-    fetch('/api/v1/articles/users/')
-    .then(response => response.json())
-    .then(data =>console.log(data));
-  }
-  //     {
-  //     if(!response.ok) {
-  //       throw new Error('Network response was not ok');
-  //     }
-  //     return response.json();
-  //   })
-  //   .then(data => this.setState({ userArticles: data  }))
-  //   .catch(error => {
-  //     console.error('There has been a problem with youor fetch operation:', error);
-  //   });
-  // }
+
+    componentDidMount(){
+      fetch('/api/v1/articles/users')
+      .then(response => {
+        if(!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => this.setState({ userArticles:data  }))
+      .catch(error => {
+        console.error('There has been a problem with youor fetch operation:', error);
+      });
+    }
+
+
+    // componentDidMount(){
+    //   fetch('/api/v1/articles/users')
+    //   .then(response => {
+    //     if(!response.ok) {
+    //       throw new Error('Network response was not ok');
+    //     }
+    //     return response.json();
+    //   })
+    //   .then(data => this.setState({ data  }))
+    //   .catch(error => {
+    //     console.error('There has been a problem with youor fetch operation:', error);
+    //   });
+    // }
 
 
   handleInput(event) {
@@ -119,7 +133,7 @@ class ArticleList extends Component {
           <ul>{userArticles}</ul>
           <section className="submit">
             <form onSubmit={this.addArticle}>
-      
+
               <input className="text" type="text" name="text" value={this.state.text} onChange={this.handleInput} />
               <button type="submit" class="btn btn-primary offset">Submit</button>
             </form>
