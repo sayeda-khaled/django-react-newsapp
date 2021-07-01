@@ -67,7 +67,8 @@ class ArticleList extends Component {
   addArticle(event) {
     event.preventDefault();
     const userArticles = {
-      text: this.state.text,
+      title: this.state.title,
+      body: this.state.body
     };
     const options = {
       method: 'POST',
@@ -77,13 +78,14 @@ class ArticleList extends Component {
       },
       body: JSON.stringify(userArticles),
     }
-    fetch('/api/v1/articles/user', options)
+    fetch('/api/v1/articles/user/', options)
       .then(response => response.json())
       .then(data => {
         const userArticles = [...this.state.userArticles];
         userArticles.push(data);
         this.setState({userArticles});
-        this.setState({ text: '' });
+        this.setState({ title: '' });
+        this.setState({ body: '' });
       });
   }
 
@@ -130,9 +132,32 @@ class ArticleList extends Component {
             this.setState({ userArticles });
           })
           .catch((error) => {
-            console.err('Error:', error);
+            console.error('Error:', error);
           });
         }
+
+        // render() {
+        //   const userArticles = this.state.userArticles.map(userArticle => (
+        //     <ArticleDetail key={userArticle.id} userArticle={userArticle} deleteArticle={this.deleteArticle} editArticle={this.editArticle} />
+        //   ));
+        //
+        //   return (
+        //     <>
+        //       <ul>{userArticles}</ul>
+        //       <section className="submit">
+        //         <form onSubmit={this.addArticle}>
+        //
+        //           <input className="text" type="text" name="text" value={this.state.title} onChange={this.handleInput} />
+        //           <input className="text" type="text" name="text" value={this.state.body} onChange={this.handleInput} />
+        //           <button type="submit" class="btn btn-primary offset">Submit</button>
+        //         </form>
+        //       </section>
+        //
+        //     </>
+        //     )
+        //   }
+        //
+        // }
 
     render() {
       const userArticles = this.state.userArticles.map(userArticle => (
@@ -142,11 +167,17 @@ class ArticleList extends Component {
       return (
         <>
           <ul>{userArticles}</ul>
-          <section className="submit">
-            <form onSubmit={this.addArticle}>
-
-              <input className="text" type="text" name="text" value={this.state.text} onChange={this.handleInput} />
-              <button type="submit" class="btn btn-primary offset">Submit</button>
+            <section className="submit">
+                <form onSubmit={this.addArticle}>
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" autoComplete="off" name="text" value={this.state.title} onChange={this.handleInput} placeholder="Insert Your Title"/>
+                    </div>
+                  <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Insert Your Article</label>
+                    <textarea class="form-control" autoComplete="off" id="exampleFormControlTextarea1" name="textarea" value={this.state.body} onChange={this.handleInput} rows="3"></textarea>
+                  </div>
+              <button type="submit" onClick={this.addArticle} class="btn btn-primary offset">Submit</button>
             </form>
           </section>
 
