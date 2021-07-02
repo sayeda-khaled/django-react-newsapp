@@ -5,6 +5,7 @@ from rest_framework import permissions
 from .models import Article
 
 from .serializers import ArticleSerializer
+from .serializers import StaffArticleSerializer
 
 # view(s) for non authenticated user
 
@@ -41,18 +42,22 @@ class UserArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ArticleSerializer
 
     def perform_update(self, serializer):
-        instance = serializer.save(author=self.request.user)
+        instance = serializer.save(is_staff=self.request.user)
 
 
 class StaffArticleListAPIView(generics.ListAPIView):
     queryset = Article.objects.all()
-    serializer_class = ArticleSerializer
+    serializer_class = StaffArticleSerializer
+    # def get_serializer_class(self):
+    #     if self.request.user.is_staff:
+    #         return FullArticleSerializer
+    #     return BasicArticleSerializer
 
 
 class StaffArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Article.objects.all()
-    serializer_class = ArticleSerializer
+    serializer_class = StaffArticleSerializer
 
     def Perform_update(self, serializer):
         instance = serializer.save(is_staff=self.request.user)

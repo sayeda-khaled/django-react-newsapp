@@ -35,6 +35,7 @@ class Navigation extends Component {
             <button className="btn" onClick={() => this.props.handleSelection('registration')}>Register</button>
             <button className="btn" onClick={() => this.props.handleSelection('profile')}>Profile</button>
             <button className="btn" onClick={() => this.props.handleLogout()}>Logout</button>
+          
           </Nav>
         </Navbar.Collapse>
       </Navbar>

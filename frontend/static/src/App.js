@@ -4,6 +4,7 @@ import Registration from './components/Registration.js';
 import Login from './components/Login';
 import Profile from './components/Profile.js';
 import ArticleList from './components/ArticleList.js';
+import AdminPage from './components/AdminPage.js';
 import Navbar from './components/Navbar.js';
 import DisplayPage from './components/DisplayPage.js'
 import './App.css';
@@ -94,6 +95,7 @@ class App extends Component{
           {this.state.selection === 'articles' && <DisplayPage  />}
           {this.state.selection === 'profile' && <Profile/> }
           {this.state.selection === 'profile' && <ArticleList />}
+          {this.state.selection === 'admin' && <AdminPage />}
           {this.state.selection === 'registration' && <Registration handleRegistration={this.handleRegistration} handleSelection={this.handleSelection}/>}
           {this.state.selection === 'login' && <Login handleLogin={this.handleLogin} handleSelection={this.handleSelection}/> }
         </main>

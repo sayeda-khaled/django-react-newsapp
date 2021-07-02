@@ -14,5 +14,14 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
+        fields = '__all__'
+        # fields = ['title', 'body', 'author', 'is_owner']
 
+
+
+class StaffArticleSerializer(serializers.ModelSerializer):
+    pass
+
+    class Meta:
+        model = Article
         fields = '__all__'
