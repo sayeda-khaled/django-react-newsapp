@@ -74,14 +74,40 @@ class Profile extends Component{
   render(){
 
 
+//   return (
+//     <>
+//       <form>
+//         <button type="submit" class="btn btn-primary offset" onClick={() => this.props.handleLogout()}>Logout</button>
+//
+//         <input type='text' name="display_name" value={this.state.display_name} onChange={this.handleInput} />
+//         <input type="file" name="avatar" onChange={this.handleImage} />
+//
+//         {this.state.avatar
+//           ? <img src={this.state.preview} alt=""/>
+//           : null
+//         }
+//         <button type="submit">Save Profile!</button>
+//       </form>
+//
+//       {this.state.data
+//         ? (
+//             <div>
+//               <p> {this.state.data.display_name} </p>
+//               <img src={this.state.data.avatar} alt=""/>
+//             </div>
+//           )
+//         : null
+//       }
+//     </>
+//     );
+//   }
+// }
+
   return (
     <>
       <form>
-        <button type="submit" class="btn btn-primary offset" onClick={() => this.props.handleLogout()}>Logout</button>
-
         <input type='text' name="display_name" value={this.state.display_name} onChange={this.handleInput} />
-        <input type="file" name="avatar" onChange={this.handleImage} />
-
+        <input type="file" name="avatar" onChange={this.handleImage}/>
         {this.state.avatar
           ? <img src={this.state.preview} alt=""/>
           : null
@@ -91,16 +117,17 @@ class Profile extends Component{
 
       {this.state.data
         ? (
-            <div>
-              <p> {this.state.data.display_name} </p>
-              <img src={this.state.data.avatar} alt=""/>
-            </div>
+          <section className="profile">
+            <header class="profile-card">
+              <h2>{this.state.data.display_name}</h2>
+              <img src={this.state.data.avatar} class="hoverZoomLink" alt=""/>
+            </header>
+          </section>
           )
         : null
       }
     </>
-    );
-  }
+  )}
 }
 
 export default Profile;
