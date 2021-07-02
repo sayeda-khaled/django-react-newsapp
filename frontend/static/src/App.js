@@ -91,7 +91,7 @@ class App extends Component{
         <Navbar handleSelection={this.handleSelection} handleLogout={this.handleLogout} />
 
         <main>
-          {this.state.selection === 'articles' && <DisplayPage />}
+          {this.state.selection === 'articles' && <DisplayPage  />}
           {this.state.selection === 'profile' && <Profile/> }
           {this.state.selection === 'profile' && <ArticleList />}
           {this.state.selection === 'registration' && <Registration handleRegistration={this.handleRegistration} handleSelection={this.handleSelection}/>}

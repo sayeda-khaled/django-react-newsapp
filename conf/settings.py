@@ -28,7 +28,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['django-react-news-app-sayeda.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'frontend.apps.FrontendConfig',
     'articles.apps.ArticlesConfig',
+    'api.apps.ApiConfig',
 ]
 
 REST_FRAMEWORK = {

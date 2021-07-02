@@ -8,7 +8,8 @@ class ArticleDetail extends Component {
 
     this.state = {
       isEditing: false,
-      text: this.props.userArticle.text,
+      title: this.props.userArticle.title,
+      body: this.props.userArticle.body,
     }
     this.handleInput = this.handleInput.bind(this);
     this.saveArticle = this.saveArticle.bind(this);
@@ -20,7 +21,10 @@ class ArticleDetail extends Component {
   }
 
   saveArticle() {
-    this.props.editArticle(this.props.userArticles.id, this.state.text);
+    const article = this.props.userArticle;
+    article.title = this.state.title;
+    article.body = this.state.body;
+    this.props.editArticle(article);
     this.setState({ isEditing: false });
   }
 
@@ -59,27 +63,32 @@ class ArticleDetail extends Component {
     const userArticles = this.props.userArticle;
     return(
       <li>
-        <h2>{userArticles.title}</h2>
-
         <div>
-          {
+            {
             this.state.isEditing
-            ? <input type="text" value={this.state.text} onChange={this.handleInput} name="text"/>
-            : <p>{userArticles.body}</p>
+              ? (
+                  <>
+                    <input type="text" value={this.state.title} onChange={this.handleInput} name="text"/>
+                    <textarea value={this.state.body} onChange={this.handleInput} name="body"></textarea>
+                  </>
+                )
+              : (
+                  <>
+                    <h2>{userArticles.title}</h2>
+                    <p>{userArticles.body}</p>
+                  </>
+                )
             }
-
-          {
+            {
             <button onClick={() => this.props.deleteArticle(userArticles.id)}>delete</button>
 
-          }
-          {
+            }
+            {
             this.state.isEditing
-            ? <button type = 'button' onClick={this.saveArticle}>Save</button>
-            : <button onClick={() => this.setState({isEditing: true})}>Edit</button>
-          }
+              ? <button type='button' onClick={this.saveArticle}>Save</button>
+              : <button onClick={() => this.setState({isEditing: true})}>Edit</button>
+            }
         </div>
-
-
       </li>
     )
   }

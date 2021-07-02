@@ -14,6 +14,7 @@ class Profile extends Component{
     this.handleInput = this.handleInput.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.editProfile = this.editProfile.bind(this);
   }
 
   componentDidMount(){
@@ -52,8 +53,6 @@ class Profile extends Component{
 
   }
 
-
-
   async handleSubmit(e) {
     e.preventDefault();
     let formData= new FormData();
@@ -71,6 +70,24 @@ class Profile extends Component{
       const response = await fetch('/api/v1/users/profiles/user/', options);
       console.log(response);
   }
+
+  editProfile(profile) {
+    const options ={
+      method: 'PUT',
+      headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': Cookies.get('csrftoken'),
+      },
+      body: JSON.stringify(profile)
+    }
+    fetch('/api/v1/users/profile/user', options)
+      .then(response =>{
+        if(!response.ok) {
+          throw new Error('Error');
+        }
+        return response.json()
+      })
+  }
   render(){
 
   return (
@@ -82,7 +99,7 @@ class Profile extends Component{
           ? <img src={this.state.preview} alt=""/>
           : null
         }
-        <button type="submit" onClick={this.handleSubmit}>Save Profile!</button>
+        <button type="submit">Save Profile!</button>
       </form>
 
       {this.state.data

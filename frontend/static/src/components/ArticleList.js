@@ -9,6 +9,8 @@ class ArticleList extends Component {
     super(props);
     this.state={
       userArticles: [],
+      title: '',
+      body: '',
     }
     this.addArticle = this.addArticle.bind(this);
     this.editArticle = this.editArticle.bind(this);
@@ -66,49 +68,46 @@ class ArticleList extends Component {
 
   addArticle(event) {
     event.preventDefault();
-    const userArticles = {
+    const article = {
       title: this.state.title,
       body: this.state.body
     };
     const options = {
       method: 'POST',
       headers: {
-        'Contnet-Type': 'application/json',
+        'Content-Type': 'application/json',
         'X-CSRFToken': Cookies.get('csrftoken'),
       },
-      body: JSON.stringify(userArticles),
+      body: JSON.stringify(article),
     }
     fetch('/api/v1/articles/user/', options)
       .then(response => response.json())
       .then(data => {
-        const userArticles = [...this.state.userArticles];
-        userArticles.push(data);
-        this.setState({userArticles});
-        this.setState({ title: '' });
-        this.setState({ body: '' });
+        const userArticles = [...this.state.userArticles, data];
+        // userArticles.push(data);
+        this.setState({userArticles, title: '', body: ''});
       });
   }
 
-    editArticle(id, text) {
-      const userArticles = {
-        text,
-      };
+    editArticle(article) {
+
       const options = {
         method: 'PUT',
         headers: {
-          'Content-Type': 'applications/json',
+          'Content-Type': 'application/json',
           'X-CSRFToken': Cookies.get('csrftoken'),
         },
-        body: JSON.stringify(userArticles),
+        body: JSON.stringify(article),
       }
-      fetch(`/api/v1/articles/user/${id}/`, options)
+      fetch(`/api/v1/articles/user/${article.id}/`, options)
         .then(response => {
           if(!response.ok) {
             throw new Error('Network response was not ok');
           }
           const userArticles = [...this.state.userArticles];
-          const index = userArticles.findIndex(article => userArticles.id === id);
-          userArticles[index].text = text;
+          const index = userArticles.findIndex(userArticle => userArticle.id === article.id);
+          userArticles[index].title = article.title;
+          userArticles[index].body = article.body;
           this.setState({ userArticles });
         });
       }
@@ -171,11 +170,11 @@ class ArticleList extends Component {
                 <form onSubmit={this.addArticle}>
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" autoComplete="off" name="text" value={this.state.title} onChange={this.handleInput} placeholder="Insert Your Title"/>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" autoComplete="off" name="title" value={this.state.title} onChange={this.handleInput} placeholder="Insert Your Title"/>
                     </div>
                   <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Insert Your Article</label>
-                    <textarea class="form-control" autoComplete="off" id="exampleFormControlTextarea1" name="textarea" value={this.state.body} onChange={this.handleInput} rows="3"></textarea>
+                    <textarea class="form-control" autoComplete="off" id="exampleFormControlTextarea1" name="body" value={this.state.body} onChange={this.handleInput} rows="3"></textarea>
                   </div>
               <button type="submit" onClick={this.addArticle} class="btn btn-primary offset">Submit</button>
             </form>

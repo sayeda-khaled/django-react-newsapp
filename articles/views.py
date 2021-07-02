@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework import permissions
 
@@ -41,6 +42,3 @@ class UserArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_update(self, serializer):
         instance = serializer.save(author=self.request.user)
-
-    def get_object(self):
-        return get_object_or_404(Article, author=self.request.user)
