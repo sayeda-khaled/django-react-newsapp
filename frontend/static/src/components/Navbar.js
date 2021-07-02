@@ -26,8 +26,7 @@ import Button from 'react-bootstrap/Button';
 class Navigation extends Component {
   render() {
     return(
-      <Navbar bg="light" expand="lg">
-
+      <Navbar bg="light" expand="lg" className="navbar">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -36,9 +35,7 @@ class Navigation extends Component {
             <button className="btn" onClick={() => this.props.handleSelection('registration')}>Register</button>
             <button className="btn" onClick={() => this.props.handleSelection('profile')}>Profile</button>
             <button className="btn" onClick={() => this.props.handleLogout()}>Logout</button>
-
           </Nav>
-
         </Navbar.Collapse>
       </Navbar>
     )

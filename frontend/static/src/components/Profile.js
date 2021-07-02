@@ -68,51 +68,21 @@ class Profile extends Component{
         },
         body: formData,
       }
-      const response = await fetch('/api/v1/users/profiles/', options);
+      const response = await fetch('/api/v1/users/profiles/user/', options);
       console.log(response);
   }
   render(){
 
-
-//   return (
-//     <>
-//       <form>
-//         <button type="submit" class="btn btn-primary offset" onClick={() => this.props.handleLogout()}>Logout</button>
-//
-//         <input type='text' name="display_name" value={this.state.display_name} onChange={this.handleInput} />
-//         <input type="file" name="avatar" onChange={this.handleImage} />
-//
-//         {this.state.avatar
-//           ? <img src={this.state.preview} alt=""/>
-//           : null
-//         }
-//         <button type="submit">Save Profile!</button>
-//       </form>
-//
-//       {this.state.data
-//         ? (
-//             <div>
-//               <p> {this.state.data.display_name} </p>
-//               <img src={this.state.data.avatar} alt=""/>
-//             </div>
-//           )
-//         : null
-//       }
-//     </>
-//     );
-//   }
-// }
-
   return (
     <>
-      <form>
+      <form onChange={this.handleSubmit}>
         <input type='text' name="display_name" value={this.state.display_name} onChange={this.handleInput} />
         <input type="file" name="avatar" onChange={this.handleImage}/>
         {this.state.avatar
           ? <img src={this.state.preview} alt=""/>
           : null
         }
-        <button type="submit">Save Profile!</button>
+        <button type="submit" onClick={this.handleSubmit}>Save Profile!</button>
       </form>
 
       {this.state.data
