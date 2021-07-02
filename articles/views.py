@@ -42,3 +42,17 @@ class UserArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_update(self, serializer):
         instance = serializer.save(author=self.request.user)
+
+
+class StaffArticleListAPIView(generics.ListAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+
+
+class StaffArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+
+    def Perform_update(self, serializer):
+        instance = serializer.save(is_staff=self.request.user)
