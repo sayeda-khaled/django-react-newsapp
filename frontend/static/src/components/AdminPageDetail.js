@@ -29,7 +29,7 @@ class AdminPageDetail extends Component {
   }
 
   render() {
-    const userArticles = this.props.userArticle;
+    const articles = this.props.article;
     return(
       <li>
         <div>
@@ -43,13 +43,13 @@ class AdminPageDetail extends Component {
                 )
               : (
                   <>
-                    <h2>{userArticles.title}</h2>
-                    <p>{userArticles.body}</p>
+                    <h2>{articles.title}</h2>
+                    <p>{articles.body}</p>
                   </>
                 )
             }
             {
-            <button onClick={() => this.props.deleteArticle(userArticles.id)}>delete</button>
+            <button onClick={() => this.props.deleteArticle(articles.id)}>delete</button>
 
             }
             {

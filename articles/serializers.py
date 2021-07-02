@@ -14,8 +14,8 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        fields = '__all__'
-        # fields = ['title', 'body', 'author', 'is_owner']
+
+        exclude = ['is_published']
 
 
 
