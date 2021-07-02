@@ -16,7 +16,6 @@ class ArticleList extends Component {
     this.editArticle = this.editArticle.bind(this);
     this.deleteArticle = this.deleteArticle.bind(this);
     this.handleInput = this.handleInput.bind(this);
-    // this.fetchArticles = this.fetchArticles.bind(this);
 
   }
 
@@ -37,30 +36,6 @@ class ArticleList extends Component {
         console.error('There has been a problem with youor fetch operation:', error);
       });
     }
-
-    // fetchArticles(){
-    //   const options= {
-    //     method: 'GET',
-    //     headers: {
-    //     'Content-Type': 'application/json',
-    //     'X-CSRFToken': Cookies.get('csrftoken'),
-    //     },
-    //   }
-    //     fetch('/api/v1/articles/users')
-    //     .then(response => {
-    //       if(!response.ok) {
-    //         throw new Error('Network response was not ok');
-    //       }
-    //       return response.json();
-    //     })
-    //     .then(data => this.setState({ userArticles: data  }))
-    //     .catch(error => {
-    //       console.error('There has been a problem with youor fetch operation:', error);
-    //     });
-    //   }
-
-
-
 
   handleInput(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -134,29 +109,6 @@ class ArticleList extends Component {
             console.error('Error:', error);
           });
         }
-
-        // render() {
-        //   const userArticles = this.state.userArticles.map(userArticle => (
-        //     <ArticleDetail key={userArticle.id} userArticle={userArticle} deleteArticle={this.deleteArticle} editArticle={this.editArticle} />
-        //   ));
-        //
-        //   return (
-        //     <>
-        //       <ul>{userArticles}</ul>
-        //       <section className="submit">
-        //         <form onSubmit={this.addArticle}>
-        //
-        //           <input className="text" type="text" name="text" value={this.state.title} onChange={this.handleInput} />
-        //           <input className="text" type="text" name="text" value={this.state.body} onChange={this.handleInput} />
-        //           <button type="submit" class="btn btn-primary offset">Submit</button>
-        //         </form>
-        //       </section>
-        //
-        //     </>
-        //     )
-        //   }
-        //
-        // }
 
     render() {
       const userArticles = this.state.userArticles.map(userArticle => (

@@ -67,8 +67,9 @@ class Profile extends Component{
         },
         body: formData,
       }
-      const response = await fetch('/api/v1/users/profiles/user/', options);
-      console.log(response);
+      const response = await fetch('/api/v1/users/profiles/', options);
+      this.setState({ response })
+      // console.log(response);
   }
 
   editProfile(profile) {
@@ -92,7 +93,7 @@ class Profile extends Component{
 
   return (
     <>
-      <form onChange={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <input type='text' name="display_name" value={this.state.display_name} onChange={this.handleInput} />
         <input type="file" name="avatar" onChange={this.handleImage}/>
         {this.state.avatar
