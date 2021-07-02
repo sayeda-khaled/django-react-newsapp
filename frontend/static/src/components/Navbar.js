@@ -31,10 +31,12 @@ class Navigation extends Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <button className="btn" onClick={() => this.props.handleLogout()}>Logout</button>
+            <button className="btn" onClick={() => this.props.handleSelection('articles')}>Main</button>
             <button className="btn" onClick={() => this.props.handleSelection('login')}>Login</button>
             <button className="btn" onClick={() => this.props.handleSelection('registration')}>Register</button>
             <button className="btn" onClick={() => this.props.handleSelection('profile')}>Profile</button>
+            <button className="btn" onClick={() => this.props.handleLogout()}>Logout</button>
+
           </Nav>
 
         </Navbar.Collapse>
